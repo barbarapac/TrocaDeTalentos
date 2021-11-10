@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Utfpr.Troca.De.Talentos.Application.CommandStack\Utfpr.Troca.De.Talentos.Application.CommandStack.csproj" />
+      <ProjectReference Include="..\Utfpr.Troca.De.Talentos.Application.QueryStack\Utfpr.Troca.De.Talentos.Application.QueryStack.csproj" />
+    </ItemGroup>
+
+</Project>
