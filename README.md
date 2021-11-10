@@ -1,5 +1,5 @@
-# TrocaDeTalentos
- Projeto de fabrica de software
+# Troca de Talentos
+ Projeto de fabrica de software;
  
 ## Aplicação Web ASP .Net Core, api da aplicação troca de talentos.
  
