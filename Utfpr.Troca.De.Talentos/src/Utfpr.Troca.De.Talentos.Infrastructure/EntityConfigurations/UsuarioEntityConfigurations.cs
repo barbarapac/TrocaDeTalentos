@@ -28,6 +28,12 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             builder.Property(x => x.Ra)
                 .IsRequired()
                 .HasColumnName("RA");
+            
+            builder.Property(x => x.FotoPerfil)
+                .HasColumnName("FOTOPERFIL");
+            
+            builder.Property(x => x.Tipo)
+                .HasColumnName("TIPO");
         }
     }
 }

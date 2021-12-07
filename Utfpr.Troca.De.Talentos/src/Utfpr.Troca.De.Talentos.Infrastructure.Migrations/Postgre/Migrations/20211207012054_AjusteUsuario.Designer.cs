@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre;
@@ -9,9 +10,10 @@ using Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre;
 namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
 {
     [DbContext(typeof(PostgreSqlMigrationsDbContext))]
-    partial class PostgreSqlMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211207012054_AjusteUsuario")]
+    partial class AjusteUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

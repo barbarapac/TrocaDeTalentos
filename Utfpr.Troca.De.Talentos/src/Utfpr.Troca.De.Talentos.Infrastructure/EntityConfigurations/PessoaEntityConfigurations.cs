@@ -33,6 +33,14 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
                 .IsRequired()
                 .HasColumnName("ESTADO");
 
+            builder.Property(x => x.Nome)
+                .IsRequired()
+                .HasColumnName("NOME");
+            
+            builder.Property(x => x.DataCadastro)
+                .IsRequired()
+                .HasColumnName("DTCADASTRO");
+            
             builder.Property<long>("_usuarioId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("CDUSUARIO");
