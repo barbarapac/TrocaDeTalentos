@@ -5,8 +5,10 @@ namespace Utfpr.Troca.De.Talentos.Domain.Pessoas
 {
     public class UsuarioArea : SimpleId<long>
     {
-        private readonly IList<Area> _areas = new List<Area>();
-        public IReadOnlyCollection<Area> Areas { get; private set; }
+        private long _usuarioId;
+        private long _areaId;
+
         public Usuario Usuario  { get; private set; }
+        public Area Area { get; private set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
@@ -17,15 +18,32 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     cdpessoa = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nome = table.Column<string>(nullable: false),
                     curso = table.Column<string>(nullable: false),
                     campus = table.Column<string>(nullable: false),
                     cidade = table.Column<string>(nullable: false),
                     estado = table.Column<string>(nullable: false),
+                    dtcadastro = table.Column<DateTime>(nullable: false),
                     cdusuario = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_pessoa", x => x.cdpessoa);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "usuarioarea",
+                schema: "UTFPR",
+                columns: table => new
+                {
+                    cdusuarioarea = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    cdarea = table.Column<long>(nullable: false),
+                    cdusuario = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_usuarioarea", x => x.cdusuarioarea);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,6 +56,8 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                     ra = table.Column<string>(nullable: false),
                     email = table.Column<string>(nullable: false),
                     senha = table.Column<string>(nullable: false),
+                    tipo = table.Column<string>(nullable: true),
+                    fotoperfil = table.Column<byte[]>(nullable: true),
                     _usuarioid = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
@@ -50,27 +70,13 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         principalTable: "pessoa",
                         principalColumn: "cdpessoa",
                         onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "atividade",
-                schema: "UTFPR",
-                columns: table => new
-                {
-                    cdusuarioarea = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    cdsecao = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_atividade", x => x.cdusuarioarea);
                     table.ForeignKey(
-                        name: "fk_atividade_usuario_cdusuarioarea",
-                        column: x => x.cdusuarioarea,
+                        name: "fk_usuario_usuarioarea__usuarioid",
+                        column: x => x._usuarioid,
                         principalSchema: "UTFPR",
-                        principalTable: "usuario",
-                        principalColumn: "cdusuario",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "usuarioarea",
+                        principalColumn: "cdusuarioarea",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,19 +86,41 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     cdarea = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descricao = table.Column<string>(nullable: false)
+                    descricao = table.Column<string>(nullable: false),
+                    usuarioid = table.Column<long>(nullable: true),
+                    _areaid = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_area", x => x.cdarea);
                     table.ForeignKey(
-                        name: "fk_area_atividade_cdarea",
-                        column: x => x.cdarea,
+                        name: "fk_area_usuario_usuarioid",
+                        column: x => x.usuarioid,
                         principalSchema: "UTFPR",
-                        principalTable: "atividade",
+                        principalTable: "usuario",
+                        principalColumn: "cdusuario",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_area_usuarioarea__areaid",
+                        column: x => x._areaid,
+                        principalSchema: "UTFPR",
+                        principalTable: "usuarioarea",
                         principalColumn: "cdusuarioarea",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_area_usuarioid",
+                schema: "UTFPR",
+                table: "area",
+                column: "usuarioid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_area__areaid",
+                schema: "UTFPR",
+                table: "area",
+                column: "_areaid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_usuario__usuarioid",
@@ -109,15 +137,15 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 schema: "UTFPR");
 
             migrationBuilder.DropTable(
-                name: "atividade",
-                schema: "UTFPR");
-
-            migrationBuilder.DropTable(
                 name: "usuario",
                 schema: "UTFPR");
 
             migrationBuilder.DropTable(
                 name: "pessoa",
+                schema: "UTFPR");
+
+            migrationBuilder.DropTable(
+                name: "usuarioarea",
                 schema: "UTFPR");
         }
     }

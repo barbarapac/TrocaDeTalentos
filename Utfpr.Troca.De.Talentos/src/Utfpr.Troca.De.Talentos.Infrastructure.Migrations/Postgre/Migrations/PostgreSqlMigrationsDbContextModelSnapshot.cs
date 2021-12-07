@@ -33,8 +33,23 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnName("descricao")
                         .HasColumnType("text");
 
+                    b.Property<long?>("UsuarioId")
+                        .HasColumnName("usuarioid")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("_areaId")
+                        .HasColumnName("_areaid")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id")
                         .HasName("pk_area");
+
+                    b.HasIndex("UsuarioId")
+                        .HasName("ix_area_usuarioid");
+
+                    b.HasIndex("_areaId")
+                        .IsUnique()
+                        .HasName("ix_area__areaid");
 
                     b.ToTable("area");
                 });
@@ -139,24 +154,32 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<long>("_secaoId")
-                        .HasColumnName("cdsecao")
+                    b.Property<long>("_areaId")
+                        .HasColumnName("cdarea")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("_usuarioId")
+                        .HasColumnName("cdusuario")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
-                        .HasName("pk_atividade");
+                        .HasName("pk_usuarioarea");
 
-                    b.ToTable("atividade");
+                    b.ToTable("usuarioarea");
                 });
 
             modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Areas.Area", b =>
                 {
-                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.UsuarioArea", null)
+                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", null)
                         .WithMany("Areas")
-                        .HasForeignKey("Id")
-                        .HasConstraintName("fk_area_atividade_cdarea")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId")
+                        .HasConstraintName("fk_area_usuario_usuarioid");
+
+                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.UsuarioArea", null)
+                        .WithOne("Area")
+                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Areas.Area", "_areaId")
+                        .HasConstraintName("fk_area_usuarioarea__areaid")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", b =>
@@ -166,16 +189,12 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "_usuarioId")
                         .HasConstraintName("fk_usuario_pessoa__usuarioid")
                         .OnDelete(DeleteBehavior.SetNull);
-                });
 
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.UsuarioArea", b =>
-                {
-                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .HasConstraintName("fk_atividade_usuario_cdusuarioarea")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.UsuarioArea", null)
+                        .WithOne("Usuario")
+                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "_usuarioId")
+                        .HasConstraintName("fk_usuario_usuarioarea__usuarioid")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

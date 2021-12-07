@@ -1,7 +1,9 @@
-﻿namespace Utfpr.Troca.De.Talentos.Domain.Areas
+﻿using Utfpr.Troca.De.Talentos.Domain.Pessoas;
+
+namespace Utfpr.Troca.De.Talentos.Domain.Areas
 {
     public class Area : SimpleId<long>
     {
-        public string Descricao { get; private set; }   
+        public string Descricao { get; private set; }
     }
 }
