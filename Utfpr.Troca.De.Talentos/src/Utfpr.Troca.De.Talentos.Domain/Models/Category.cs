@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Utfpr.Troca.De.Talentos.Domain.Models
 {
+    [Obsolete]
     public class Category : BaseEntity
     {
         public int offerId { get; set; }
