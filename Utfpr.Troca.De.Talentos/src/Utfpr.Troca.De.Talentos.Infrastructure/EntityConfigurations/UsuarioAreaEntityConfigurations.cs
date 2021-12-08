@@ -12,22 +12,26 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             builder.ToTable("USUARIOAREA");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).IsRequired().HasColumnName("CDUSUARIOAREA").ValueGeneratedOnAdd();
+            builder.Property(x => x.UsuarioId).IsRequired().HasColumnName("CDUSUARIO");
+            builder.Property(x => x.AreaId).IsRequired().HasColumnName("CDAREA");
+            
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .HasForeignKey(x => x.UsuarioId)
+                .IsRequired();
+            
+            builder.HasOne(x => x.Area)
+                .WithMany()
+                .HasForeignKey(x => x.AreaId)
+                .IsRequired();
             
             builder.Property<long>("_usuarioId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("CDUSUARIO");
-            builder.HasOne(o => o.Usuario)
-                .WithOne()
-                .HasForeignKey<Usuario>("_usuarioId")
-                .OnDelete(DeleteBehavior.SetNull);
             
             builder.Property<long>("_areaId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("CDAREA");
-            builder.HasOne(o => o.Area)
-                .WithOne()
-                .HasForeignKey<Area>("_areaId")
-                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

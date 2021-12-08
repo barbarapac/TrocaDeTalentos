@@ -34,6 +34,8 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             
             builder.Property(x => x.Tipo)
                 .HasColumnName("TIPO");
+            
+            builder.HasMany(x => x.Areas);
         }
     }
 }
