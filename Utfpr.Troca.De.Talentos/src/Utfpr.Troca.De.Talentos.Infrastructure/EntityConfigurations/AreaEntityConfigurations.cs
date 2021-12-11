@@ -14,7 +14,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             
             builder.Property(x => x.Id)
                 .IsRequired()
-                .HasColumnName("CDAREA").ValueGeneratedOnAdd();
+                .HasColumnName("IDAREA").ValueGeneratedOnAdd();
             
             builder.Property(x => x.Descricao)
                 .IsRequired()

@@ -10,7 +10,5 @@ namespace Utfpr.Troca.De.Talentos.Domain.Pessoas
         
         public Usuario Usuario  { get; private set; }
         public Area Area { get; private set; }
-        public long UsuarioId { get; private set; }
-        public long AreaId { get; private set; }
     }
 }

@@ -11,27 +11,23 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
         {
             builder.ToTable("USUARIOAREA");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).IsRequired().HasColumnName("CDUSUARIOAREA").ValueGeneratedOnAdd();
-            builder.Property(x => x.UsuarioId).IsRequired().HasColumnName("CDUSUARIO");
-            builder.Property(x => x.AreaId).IsRequired().HasColumnName("CDAREA");
-            
-            builder.HasOne(x => x.Usuario)
-                .WithMany()
-                .HasForeignKey(x => x.UsuarioId)
-                .IsRequired();
-            
-            builder.HasOne(x => x.Area)
-                .WithMany()
-                .HasForeignKey(x => x.AreaId)
-                .IsRequired();
+            builder.Property(x => x.Id).IsRequired().HasColumnName("IDUSUARIOAREA").ValueGeneratedOnAdd();
             
             builder.Property<long>("_usuarioId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("CDUSUARIO");
-            
+                .HasColumnName("IDUSUARIO");
+            builder.HasOne(x => x.Usuario)
+                .WithMany(x => x.Areas)
+                .HasForeignKey("_usuarioId")
+                .IsRequired();
+
             builder.Property<long>("_areaId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("CDAREA");
+                .HasColumnName("IDAREA");
+            builder.HasOne(x => x.Area)
+                .WithMany()
+                .HasForeignKey("_areaId")
+                .IsRequired();
         }
     }
 }
