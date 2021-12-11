@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Utfpr.Troca.De.Talentos.Domain.Models
 {
+    [Obsolete]
     public class Offer
     {
         public int userId { get; set; }

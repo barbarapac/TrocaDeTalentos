@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Utfpr.Troca.De.Talentos.Domain.Models
 {
+    [Obsolete]
     public class User : BaseEntity
     {
         [Required]
@@ -32,20 +34,23 @@ namespace Utfpr.Troca.De.Talentos.Domain.Models
             Email = email;
             Password = password;
         }
-        public void Update(string name, string email, string password)
-        {
-            ValidaUsuario(name, email, password);
-        }
-        private void ValidaUsuario()
-        {
-            if (string.IsNullOrEmpty(Name))
-                throw new Exception("Nome não pode ser vazio");
-
-            if (string.IsNullOrEmpty(Email))
-                throw new Exception("Email não pode ser vazio");
-
-            if (string.IsNullOrEmpty(Password))
-                throw new Exception("Senha não pode ser vazio");
-        }
+        
+        
+        
+        // public void Update(string name, string email, string password)
+        // {
+        //     ValidaUsuario(name, email, password);
+        // }
+        // private void ValidaUsuario()
+        // {
+        //     if (string.IsNullOrEmpty(Name))
+        //         throw new Exception("Nome não pode ser vazio");
+        //
+        //     if (string.IsNullOrEmpty(Email))
+        //         throw new Exception("Email não pode ser vazio");
+        //
+        //     if (string.IsNullOrEmpty(Password))
+        //         throw new Exception("Senha não pode ser vazio");
+        // }
     }
 }
