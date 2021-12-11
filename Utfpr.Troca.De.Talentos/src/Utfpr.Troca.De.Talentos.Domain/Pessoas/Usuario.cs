@@ -9,12 +9,11 @@ namespace Utfpr.Troca.De.Talentos.Domain.Pessoas
     {
         private long _usuarioId;
         
-        private readonly IList<Area> _Areas = new List<Area>();
         public string Ra { get; private set; }
         public string Email { get; private set; }
         public string Senha { get; private set; }
         public string Tipo { get; private set; }
         public byte[] FotoPerfil { get; private set; }
-        public IReadOnlyCollection<Area> Areas => _Areas.ToList().AsReadOnly();
+        public IList<UsuarioArea> Areas { get; private set; } = new List<UsuarioArea>();
     }
 }

@@ -14,7 +14,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             
             builder.Property(x => x.Id)
                 .IsRequired()
-                .HasColumnName("CDUSUARIO")
+                .HasColumnName("IDUSUARIO")
                 .ValueGeneratedOnAdd();
             
             builder.Property(x => x.Email)

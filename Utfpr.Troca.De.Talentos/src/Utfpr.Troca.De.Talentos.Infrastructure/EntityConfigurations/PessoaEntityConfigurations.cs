@@ -14,7 +14,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             
             builder.Property(x => x.Id)
                 .IsRequired()
-                .HasColumnName("CDPESSOA")
+                .HasColumnName("IDPESSOA")
                 .ValueGeneratedOnAdd();
             
             builder.Property(x => x.Campus)
@@ -41,14 +41,14 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
                 .IsRequired()
                 .HasColumnName("DTCADASTRO");
             
-            builder.Property<long>("_usuarioId")
-                .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasColumnName("CDUSUARIO");
-
-            builder.HasOne(o => o.Usuario)
+            builder.Property(x => x.UsuarioId)
+                .IsRequired()
+                .HasColumnName("IDUSUARIO");
+            
+            builder.HasOne(x => x.Usuario)
                 .WithOne()
-                .HasForeignKey<Usuario>("_usuarioId")
-                .OnDelete(DeleteBehavior.SetNull);
+                .HasForeignKey<Usuario>(x => x.Id)
+                .IsRequired();
         }
     }
 }

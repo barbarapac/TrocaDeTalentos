@@ -24,7 +24,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("cdarea")
+                        .HasColumnName("idarea")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
@@ -33,15 +33,8 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnName("descricao")
                         .HasColumnType("text");
 
-                    b.Property<long?>("UsuarioId")
-                        .HasColumnName("usuarioid")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id")
                         .HasName("pk_area");
-
-                    b.HasIndex("UsuarioId")
-                        .HasName("ix_area_usuarioid");
 
                     b.ToTable("area");
                 });
@@ -50,7 +43,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("cdpessoa")
+                        .HasColumnName("idpessoa")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
@@ -83,8 +76,8 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnName("nome")
                         .HasColumnType("text");
 
-                    b.Property<long>("_usuarioId")
-                        .HasColumnName("cdusuario")
+                    b.Property<long>("UsuarioId")
+                        .HasColumnName("idusuario")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
@@ -97,7 +90,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("cdusuario")
+                        .HasColumnName("idusuario")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
@@ -124,16 +117,8 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnName("tipo")
                         .HasColumnType("text");
 
-                    b.Property<long>("_usuarioId")
-                        .HasColumnName("_usuarioid")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id")
                         .HasName("pk_usuario");
-
-                    b.HasIndex("_usuarioId")
-                        .IsUnique()
-                        .HasName("ix_usuario__usuarioid");
 
                     b.ToTable("usuario");
                 });
@@ -142,53 +127,37 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("cdusuarioarea")
+                        .HasColumnName("idusuarioarea")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<long>("AreaId")
-                        .HasColumnName("cdarea")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("UsuarioId")
-                        .HasColumnName("cdusuario")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("_areaId")
-                        .HasColumnName("cdarea")
+                        .HasColumnName("idarea")
                         .HasColumnType("bigint");
 
                     b.Property<long>("_usuarioId")
-                        .HasColumnName("cdusuario")
+                        .HasColumnName("idusuario")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
                         .HasName("pk_usuarioarea");
 
-                    b.HasIndex("AreaId")
-                        .HasName("ix_usuarioarea_cdarea");
+                    b.HasIndex("_areaId")
+                        .HasName("ix_usuarioarea_idarea");
 
-                    b.HasIndex("UsuarioId")
-                        .HasName("ix_usuarioarea_cdusuario");
+                    b.HasIndex("_usuarioId")
+                        .HasName("ix_usuarioarea_idusuario");
 
                     b.ToTable("usuarioarea");
-                });
-
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Areas.Area", b =>
-                {
-                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", null)
-                        .WithMany("Areas")
-                        .HasForeignKey("UsuarioId")
-                        .HasConstraintName("fk_area_usuario_usuarioid");
                 });
 
             modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", b =>
                 {
                     b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Pessoa", null)
                         .WithOne("Usuario")
-                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "_usuarioId")
-                        .HasConstraintName("fk_usuario_pessoa__usuarioid")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "Id")
+                        .HasConstraintName("fk_usuario_pessoa_idusuario")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -196,15 +165,15 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     b.HasOne("Utfpr.Troca.De.Talentos.Domain.Areas.Area", "Area")
                         .WithMany()
-                        .HasForeignKey("AreaId")
-                        .HasConstraintName("fk_usuarioarea_area_cdarea")
+                        .HasForeignKey("_areaId")
+                        .HasConstraintName("fk_usuarioarea_area_idarea")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .HasConstraintName("fk_usuarioarea_usuario_cdusuario")
+                        .WithMany("Areas")
+                        .HasForeignKey("_usuarioId")
+                        .HasConstraintName("fk_usuarioarea_usuario_idusuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
