@@ -9,4 +9,11 @@
       <ProjectReference Include="..\Utfpr.Troca.De.Talentos.Domain\Utfpr.Troca.De.Talentos.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="10.1.1" />
+        <PackageReference Include="MediatR" Version="8.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+        <PackageReference Include="RestSharp" Version="106.15.1-alpha.0.1" />
+    </ItemGroup>
+    
 </Project>

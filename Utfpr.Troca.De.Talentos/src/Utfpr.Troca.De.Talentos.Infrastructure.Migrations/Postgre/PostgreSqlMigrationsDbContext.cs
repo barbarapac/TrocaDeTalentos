@@ -39,7 +39,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre
         }
         
         private static string ConvertCase(string value)
-            => value.ToLower();
+            => value.ToUpper();
 
         private static void ConvertIndexes(IMutableEntityType entityType)
         {

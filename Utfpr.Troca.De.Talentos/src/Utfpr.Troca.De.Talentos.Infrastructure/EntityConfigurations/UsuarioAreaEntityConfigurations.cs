@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Utfpr.Troca.De.Talentos.Domain.Areas;
 using Utfpr.Troca.De.Talentos.Domain.Pessoas;
+using Utfpr.Troca.De.Talentos.Domain.UsuarioArea;
 
 namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
 {

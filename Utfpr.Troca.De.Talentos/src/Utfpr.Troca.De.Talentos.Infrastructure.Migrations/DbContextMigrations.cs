@@ -9,7 +9,6 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.HasDefaultSchema(TrocaTalentosContext.DbSchema);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TrocaTalentosContext).Assembly);
         }
     }

@@ -1,38 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands;
+using Utfpr.Troca.De.Talentos.Domain.Usuario.Dtos;
+using Utfpr.Troca.De.Talentos.QueryStack.Usuarios;
 
 namespace Utfpr.Troca.De.Talentos.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ExempleController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
-        private readonly ILogger<ExempleController> _logger;
+        private readonly ILogger<UsuarioController> _logger;
+        private readonly IMediator _mediator;
+        private readonly IUsuarioQuerie _usuarioQuerie;
 
-        public ExempleController(ILogger<ExempleController> logger)
+        public UsuarioController(ILogger<UsuarioController> logger, IMediator mediator, IUsuarioQuerie usuarioQuerie)
         {
             _logger = logger;
+            _mediator = mediator;
+            _usuarioQuerie = usuarioQuerie;
         }
         
         /// <summary>
-        /// Inserir usuário
+        /// Obter usuário
         /// </summary>
-        /// <param name="json"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsuarioDto>> GetUsuario(long id)
+        {
+            var result = await _usuarioQuerie.ObterUsuarioPorIdAsync(id);
+
+            if (result == null)
+                return NotFound();
+
+            return result;
+        }
+        
+        /// <summary>
+        /// Criar usuário
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpPost]
-        public async Task<string> InserirUsuario(string json)
+        public async Task<ActionResult<UsuarioDto>> CadastrarUsuario([FromBody] UsuarioDto usuario)
         {
             try
             {
-                return "de boa";
+                if (usuario != null)
+                {
+                    UsuarioDto result = await _mediator.Send(UsuarioCriacaoAutenticacaoCommand.Create(usuario));
+                    
+                    return CreatedAtAction(
+                        nameof(GetUsuario),
+                        new { id = result.Id },
+                        result);
+                }
+                
+                return UnprocessableEntity("Usuário nulo ou vazio.");
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return "error";
+                return UnprocessableEntity("Ocorreu um erro ao cadastrar o usuário.");
             }
         }
     }
