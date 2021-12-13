@@ -35,8 +35,8 @@ namespace Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands.Handlers
                 var result = await _usuarioRepository.SaveUsuarioAsync(usuario);
                 return _mapper.Map<Usuario, UsuarioDto>(result);
             }
-            
-            return null;
+
+            throw new Exception("Usuário já cadastrado.");
         }
 
         private static void AutenticacaoUsuarioServerUtfAsync(UsuarioCriacaoAutenticacaoCommand request)

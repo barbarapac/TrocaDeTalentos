@@ -10,7 +10,7 @@ using Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre;
 namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
 {
     [DbContext(typeof(PostgreSqlMigrationsDbContext))]
-    [Migration("20211211210316_MigracaoInicial")]
+    [Migration("20211213225429_MigracaoInicial")]
     partial class MigracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,17 +49,14 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Campus")
-                        .IsRequired()
                         .HasColumnName("CAMPUS")
                         .HasColumnType("text");
 
                     b.Property<string>("Cidade")
-                        .IsRequired()
                         .HasColumnName("CIDADE")
                         .HasColumnType("text");
 
                     b.Property<string>("Curso")
-                        .IsRequired()
                         .HasColumnName("CURSO")
                         .HasColumnType("text");
 
@@ -68,7 +65,6 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Estado")
-                        .IsRequired()
                         .HasColumnName("ESTADO")
                         .HasColumnType("text");
 

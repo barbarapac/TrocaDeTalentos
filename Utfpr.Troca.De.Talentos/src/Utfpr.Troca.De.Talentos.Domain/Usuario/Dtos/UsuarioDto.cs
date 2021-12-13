@@ -3,9 +3,9 @@
     public class UsuarioDto
     {
         public long Id { get; set; }
-        public string Ra { get; private set; }
-        public string Email { get; private set; }
-        public string Senha { get; private set; }
-        public string Tipo { get; private set; }
+        public string Ra { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+        public string Tipo { get; set; }
     }
 }

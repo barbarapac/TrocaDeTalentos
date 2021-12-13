@@ -19,19 +19,15 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
                 .ValueGeneratedOnAdd();
             
             builder.Property(x => x.Campus)
-                .IsRequired()
                 .HasColumnName("CAMPUS");
             
             builder.Property(x => x.Cidade)
-                .IsRequired()
                 .HasColumnName("CIDADE");
             
             builder.Property(x => x.Curso)
-                .IsRequired()
                 .HasColumnName("CURSO");
             
             builder.Property(x => x.Estado)
-                .IsRequired()
                 .HasColumnName("ESTADO");
 
             builder.Property(x => x.Nome)

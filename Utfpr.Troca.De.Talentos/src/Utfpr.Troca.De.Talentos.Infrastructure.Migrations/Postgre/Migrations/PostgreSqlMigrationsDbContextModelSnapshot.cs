@@ -47,17 +47,14 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Campus")
-                        .IsRequired()
                         .HasColumnName("CAMPUS")
                         .HasColumnType("text");
 
                     b.Property<string>("Cidade")
-                        .IsRequired()
                         .HasColumnName("CIDADE")
                         .HasColumnType("text");
 
                     b.Property<string>("Curso")
-                        .IsRequired()
                         .HasColumnName("CURSO")
                         .HasColumnType("text");
 
@@ -66,7 +63,6 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Estado")
-                        .IsRequired()
                         .HasColumnName("ESTADO")
                         .HasColumnType("text");
 
