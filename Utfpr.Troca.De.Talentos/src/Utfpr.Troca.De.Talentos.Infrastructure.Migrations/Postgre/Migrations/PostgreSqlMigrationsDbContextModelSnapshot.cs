@@ -15,7 +15,6 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("UTFPR")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.17")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
@@ -24,156 +23,152 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("idarea")
+                        .HasColumnName("IDAREA")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnName("descricao")
+                        .HasColumnName("DESCRICAO")
                         .HasColumnType("text");
 
                     b.HasKey("Id")
-                        .HasName("pk_area");
+                        .HasName("PK_AREA");
 
-                    b.ToTable("area");
+                    b.ToTable("AREA");
                 });
 
             modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.Pessoa", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("idpessoa")
+                        .HasColumnName("IDPESSOA")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Campus")
-                        .IsRequired()
-                        .HasColumnName("campus")
+                        .HasColumnName("CAMPUS")
                         .HasColumnType("text");
 
                     b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnName("cidade")
+                        .HasColumnName("CIDADE")
                         .HasColumnType("text");
 
                     b.Property<string>("Curso")
-                        .IsRequired()
-                        .HasColumnName("curso")
+                        .HasColumnName("CURSO")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnName("dtcadastro")
+                        .HasColumnName("DTCADASTRO")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnName("estado")
+                        .HasColumnName("ESTADO")
                         .HasColumnType("text");
+
+                    b.Property<byte[]>("FotoPerfil")
+                        .HasColumnName("FOTOPERFIL")
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("nome")
+                        .HasColumnName("NOME")
                         .HasColumnType("text");
 
                     b.Property<long>("UsuarioId")
-                        .HasColumnName("idusuario")
+                        .HasColumnName("IDUSUARIO")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
-                        .HasName("pk_pessoa");
+                        .HasName("PK_PESSOA");
 
-                    b.ToTable("pessoa");
+                    b.ToTable("PESSOA");
                 });
 
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", b =>
+            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("idusuario")
+                        .HasColumnName("IDUSUARIO")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnName("email")
+                        .HasColumnName("EMAIL")
                         .HasColumnType("text");
-
-                    b.Property<byte[]>("FotoPerfil")
-                        .HasColumnName("fotoperfil")
-                        .HasColumnType("bytea");
 
                     b.Property<string>("Ra")
                         .IsRequired()
-                        .HasColumnName("ra")
+                        .HasColumnName("RA")
                         .HasColumnType("text");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnName("senha")
+                        .HasColumnName("SENHA")
                         .HasColumnType("text");
 
                     b.Property<string>("Tipo")
-                        .HasColumnName("tipo")
+                        .HasColumnName("TIPO")
                         .HasColumnType("text");
 
                     b.HasKey("Id")
-                        .HasName("pk_usuario");
+                        .HasName("PK_USUARIO");
 
-                    b.ToTable("usuario");
+                    b.ToTable("USUARIO");
                 });
 
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.UsuarioArea", b =>
+            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.UsuarioArea.UsuarioArea", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("idusuarioarea")
+                        .HasColumnName("IDUSUARIOAREA")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("_areaId")
-                        .HasColumnName("idarea")
+                        .HasColumnName("IDAREA")
                         .HasColumnType("bigint");
 
                     b.Property<long>("_usuarioId")
-                        .HasColumnName("idusuario")
+                        .HasColumnName("IDUSUARIO")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
-                        .HasName("pk_usuarioarea");
+                        .HasName("PK_USUARIOAREA");
 
                     b.HasIndex("_areaId")
-                        .HasName("ix_usuarioarea_idarea");
+                        .HasName("IX_USUARIOAREA_IDAREA");
 
                     b.HasIndex("_usuarioId")
-                        .HasName("ix_usuarioarea_idusuario");
+                        .HasName("IX_USUARIOAREA_IDUSUARIO");
 
-                    b.ToTable("usuarioarea");
+                    b.ToTable("USUARIOAREA");
                 });
 
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", b =>
+            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", b =>
                 {
                     b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Pessoa", null)
                         .WithOne("Usuario")
-                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "Id")
-                        .HasConstraintName("fk_usuario_pessoa_idusuario")
+                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", "Id")
+                        .HasConstraintName("FK_USUARIO_PESSOA_IDUSUARIO")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.UsuarioArea", b =>
+            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.UsuarioArea.UsuarioArea", b =>
                 {
                     b.HasOne("Utfpr.Troca.De.Talentos.Domain.Areas.Area", "Area")
                         .WithMany()
                         .HasForeignKey("_areaId")
-                        .HasConstraintName("fk_usuarioarea_area_idarea")
+                        .HasConstraintName("FK_USUARIOAREA_AREA_IDAREA")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Usuario", "Usuario")
+                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", "Usuario")
                         .WithMany("Areas")
                         .HasForeignKey("_usuarioId")
-                        .HasConstraintName("fk_usuarioarea_usuario_idusuario")
+                        .HasConstraintName("FK_USUARIOAREA_USUARIO_IDUSUARIO")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

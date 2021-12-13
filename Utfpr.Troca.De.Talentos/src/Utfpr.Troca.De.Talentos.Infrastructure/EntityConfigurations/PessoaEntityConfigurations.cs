@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Utfpr.Troca.De.Talentos.Domain.Pessoas;
+using Utfpr.Troca.De.Talentos.Domain.Usuario;
 
 namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
 {
@@ -18,19 +19,15 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
                 .ValueGeneratedOnAdd();
             
             builder.Property(x => x.Campus)
-                .IsRequired()
                 .HasColumnName("CAMPUS");
             
             builder.Property(x => x.Cidade)
-                .IsRequired()
                 .HasColumnName("CIDADE");
             
             builder.Property(x => x.Curso)
-                .IsRequired()
                 .HasColumnName("CURSO");
             
             builder.Property(x => x.Estado)
-                .IsRequired()
                 .HasColumnName("ESTADO");
 
             builder.Property(x => x.Nome)
@@ -44,6 +41,9 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
             builder.Property(x => x.UsuarioId)
                 .IsRequired()
                 .HasColumnName("IDUSUARIO");
+            
+            builder.Property(x => x.FotoPerfil)
+                .HasColumnName("FOTOPERFIL");
             
             builder.HasOne(x => x.Usuario)
                 .WithOne()

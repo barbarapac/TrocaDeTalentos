@@ -24,20 +24,8 @@ namespace Utfpr.Troca.De.Talentos
             services.AddDbContext<TrocaTalentosContext>(options =>
                 options.UseNpgsql(connectionString)
             );
-            
             services.AddControllers();
-            services.AddSwaggerGen();
-            
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "Troca de talentos - API",
-                    Description = "Documentação API",
-                    Version = "v1"
-                });
-
-            });
+            services.RegistraTodosServicosAplicacao();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

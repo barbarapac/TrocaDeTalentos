@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using Utfpr.Troca.De.Talentos.Domain.Areas;
+using Utfpr.Troca.De.Talentos.Domain.Pessoas;
 
-namespace Utfpr.Troca.De.Talentos.Domain.Pessoas
+namespace Utfpr.Troca.De.Talentos.Domain.Usuario
 {
     public class Usuario : SimpleId<long>
     {
@@ -13,7 +11,6 @@ namespace Utfpr.Troca.De.Talentos.Domain.Pessoas
         public string Email { get; private set; }
         public string Senha { get; private set; }
         public string Tipo { get; private set; }
-        public byte[] FotoPerfil { get; private set; }
-        public IList<UsuarioArea> Areas { get; private set; } = new List<UsuarioArea>();
+        public IList<UsuarioArea.UsuarioArea> Areas { get; private set; } = new List<UsuarioArea.UsuarioArea>();
     }
 }
