@@ -4,7 +4,7 @@
 ## Aplicação .Net Core, api da aplicação troca de talentos.
  
 ### Tecnologias utilizadas:
-- .Net Cores 3.1
+- .Net Core 3.1
     > NET Core é um framework livre e de código aberto para os sistemas operacionais Windows, Linux e macOS. É um sucessor de código aberto do .NET Framework. O projeto é desenvolvido principalmente pela Microsoft e lançado com a Licença MIT.
 - NUnit (.NET Core)
     > O NUnit é um dos frameworks para realização de testes unitários em .NET.
@@ -18,7 +18,7 @@
     > https://code.visualstudio.com/download
 
 ### Instruções para a execução do projeto:
-- Abrir a IDE do Visual Studio.
+- Abrir a IDE.
 - Executar o projeto através <Vários Projetos de Inicialização>(já configurado).
 - Pagina inicial da aplicação será aberta no seu navegador padrão, com a documentação Swagger.
 
