@@ -19,16 +19,14 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
                 .HasColumnName("IDUSUARIO");
             builder.HasOne(x => x.Usuario)
                 .WithMany(x => x.Areas)
-                .HasForeignKey("_usuarioId")
-                .IsRequired();
+                .HasForeignKey("_usuarioId");
 
             builder.Property<long>("_areaId")
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasColumnName("IDAREA");
             builder.HasOne(x => x.Area)
                 .WithMany()
-                .HasForeignKey("_areaId")
-                .IsRequired();
+                .HasForeignKey("_areaId");
         }
     }
 }

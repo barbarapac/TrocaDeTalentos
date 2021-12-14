@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
+namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.DbMigrations.Migrations
 {
     public partial class MigracaoInicial : Migration
     {
@@ -19,6 +19,22 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AREA", x => x.IDAREA);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "USUARIO",
+                columns: table => new
+                {
+                    IDUSUARIO = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RA = table.Column<string>(nullable: false),
+                    EMAIL = table.Column<string>(nullable: false),
+                    SENHA = table.Column<string>(nullable: false),
+                    TIPO = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_USUARIO", x => x.IDUSUARIO);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,27 +55,11 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PESSOA", x => x.IDPESSOA);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "USUARIO",
-                columns: table => new
-                {
-                    IDUSUARIO = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RA = table.Column<string>(nullable: false),
-                    EMAIL = table.Column<string>(nullable: false),
-                    SENHA = table.Column<string>(nullable: false),
-                    TIPO = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_USUARIO", x => x.IDUSUARIO);
                     table.ForeignKey(
-                        name: "FK_USUARIO_PESSOA_IDUSUARIO",
+                        name: "FK_PESSOA_USUARIO_IDUSUARIO",
                         column: x => x.IDUSUARIO,
-                        principalTable: "PESSOA",
-                        principalColumn: "IDPESSOA",
+                        principalTable: "USUARIO",
+                        principalColumn: "IDUSUARIO",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -90,6 +90,12 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PESSOA_IDUSUARIO",
+                table: "PESSOA",
+                column: "IDUSUARIO",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_USUARIOAREA_IDAREA",
                 table: "USUARIOAREA",
                 column: "IDAREA");
@@ -103,6 +109,9 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "PESSOA");
+
+            migrationBuilder.DropTable(
                 name: "USUARIOAREA");
 
             migrationBuilder.DropTable(
@@ -110,9 +119,6 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
 
             migrationBuilder.DropTable(
                 name: "USUARIO");
-
-            migrationBuilder.DropTable(
-                name: "PESSOA");
         }
     }
 }
