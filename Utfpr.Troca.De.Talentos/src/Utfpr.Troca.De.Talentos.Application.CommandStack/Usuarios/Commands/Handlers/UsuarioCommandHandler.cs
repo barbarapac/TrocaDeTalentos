@@ -32,8 +32,16 @@ namespace Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands.Handlers
             {
                 var validation = usuario.Validation();
                 if (!validation.IsValid) throw new Exception(validation.ValidationResult.ToString());
-                var result = await _usuarioRepository.SaveUsuarioAsync(usuario);
-                return _mapper.Map<Usuario, UsuarioDto>(result);
+                try
+                {
+                    var result = await _usuarioRepository.SaveUsuarioAsync(usuario);
+                    return _mapper.Map<Usuario, UsuarioDto>(result);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
 
             throw new Exception("Usuário já cadastrado.");

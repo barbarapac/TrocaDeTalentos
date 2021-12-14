@@ -5,6 +5,8 @@ namespace Utfpr.Troca.De.Talentos.Domain.Pessoas
 {
     public class Pessoa : SimpleId<long>
     {
+        private long _usuarioId;
+        
         public string Nome { get; private set; }
         public Usuario.Usuario Usuario { get; private set; }
         public long UsuarioId { get; set; }

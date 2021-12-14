@@ -2,16 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre;
+using Utfpr.Troca.De.Talentos.Infrastructure.Migrations.DbMigrations;
 
-namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
+namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.DbMigrations.Migrations
 {
-    [DbContext(typeof(PostgreSqlMigrationsDbContext))]
-    partial class PostgreSqlMigrationsDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DataBaseMigrationsDbContext))]
+    [Migration("20211214001958_MigracaoInicial")]
+    partial class MigracaoInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,6 +84,10 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                     b.HasKey("Id")
                         .HasName("PK_PESSOA");
 
+                    b.HasIndex("UsuarioId")
+                        .IsUnique()
+                        .HasName("IX_PESSOA_IDUSUARIO");
+
                     b.ToTable("PESSOA");
                 });
 
@@ -146,12 +152,12 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre.Migrations
                     b.ToTable("USUARIOAREA");
                 });
 
-            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", b =>
+            modelBuilder.Entity("Utfpr.Troca.De.Talentos.Domain.Pessoas.Pessoa", b =>
                 {
-                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Pessoas.Pessoa", null)
-                        .WithOne("Usuario")
-                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", "Id")
-                        .HasConstraintName("FK_USUARIO_PESSOA_IDUSUARIO")
+                    b.HasOne("Utfpr.Troca.De.Talentos.Domain.Usuario.Usuario", "Usuario")
+                        .WithOne()
+                        .HasForeignKey("Utfpr.Troca.De.Talentos.Domain.Pessoas.Pessoa", "UsuarioId")
+                        .HasConstraintName("FK_PESSOA_USUARIO_IDUSUARIO")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

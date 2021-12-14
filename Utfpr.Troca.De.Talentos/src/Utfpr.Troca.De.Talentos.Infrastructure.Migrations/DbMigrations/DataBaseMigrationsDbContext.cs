@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
-namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.Postgre
+namespace Utfpr.Troca.De.Talentos.Infrastructure.Migrations.DbMigrations
 {
-    public class PostgreSqlMigrationsDbContext : DbContextMigrations
+    public class DataBaseMigrationsDbContext : DbContextMigrations
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

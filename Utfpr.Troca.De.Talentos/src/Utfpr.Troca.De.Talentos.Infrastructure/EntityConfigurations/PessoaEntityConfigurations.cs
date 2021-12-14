@@ -39,16 +39,13 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.EntityConfigurations
                 .HasColumnName("DTCADASTRO");
             
             builder.Property(x => x.UsuarioId)
-                .IsRequired()
                 .HasColumnName("IDUSUARIO");
             
             builder.Property(x => x.FotoPerfil)
                 .HasColumnName("FOTOPERFIL");
             
             builder.HasOne(x => x.Usuario)
-                .WithOne()
-                .HasForeignKey<Usuario>(x => x.Id)
-                .IsRequired();
+                .WithOne();
         }
     }
 }

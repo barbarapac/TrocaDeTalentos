@@ -7,6 +7,7 @@ using Utfpr.Troca.De.Talentos.Domain.Usuario.Dtos;
 using Utfpr.Troca.De.Talentos.Domain.Usuario.Interfaces;
 using Utfpr.Troca.De.Talentos.Infrastructure.Repositories;
 using Utfpr.Troca.De.Talentos.QueryStack.Areas;
+using Utfpr.Troca.De.Talentos.QueryStack.Areas.Imp;
 using Utfpr.Troca.De.Talentos.QueryStack.Usuarios;
 using Utfpr.Troca.De.Talentos.QueryStack.Usuarios.Imp;
 
@@ -56,7 +57,7 @@ namespace Utfpr.Troca.De.Talentos
         private static IServiceCollection RegistraTodasAsQueries(this IServiceCollection services)
         {
             services.AddScoped<IUsuarioQuerie, UsuarioQuerie>();
-            services.AddScoped<IAreaQuerie, IAreaQuerie>();
+            services.AddScoped<IAreaQuerie, AreaQuerie>();
             return services;
         }
     }
