@@ -22,7 +22,7 @@
 - Executar o projeto através <Vários Projetos de Inicialização>(já configurado).
 - Pagina inicial da aplicação será aberta no seu navegador padrão, com a documentação Swagger.
 
-### Instruções para a execução do migrations:
+### Instruções para a execução migrations:
 - Ter instalado PostgreSQL na máquina;
 - Navegar via terminal até a pasta `Utfpr.Troca.De.Talentos.Infrastructure.Migrations`;
 - Executar o comando `dotnet ef database update --context DataBaseMigrationsDbContext`;
