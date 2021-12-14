@@ -1,7 +1,7 @@
 # Troca de Talentos
  Projeto de fabrica de software;
  
-## Aplicação Web ASP .Net Core, api da aplicação troca de talentos.
+## Aplicação .Net Core, api da aplicação troca de talentos.
  
 ### Tecnologias utilizadas:
 - .Net Cores 3.1
