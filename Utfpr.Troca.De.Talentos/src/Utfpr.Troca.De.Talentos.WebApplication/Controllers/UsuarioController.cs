@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands;
 using Utfpr.Troca.De.Talentos.Domain.Usuario.Dtos;
 using Utfpr.Troca.De.Talentos.QueryStack.Usuarios;
+using Utfpr.Troca.De.Talentos.Utils;
 
 namespace Utfpr.Troca.De.Talentos.Controllers
 {
@@ -53,7 +54,7 @@ namespace Utfpr.Troca.De.Talentos.Controllers
             {
                 if (usuario != null)
                 {
-                    UsuarioDto result = await _mediator.Send(UsuarioCriacaoAutenticacaoCommand.Create(usuario));
+                    UsuarioDto result = await _mediator.Send(CriarUsuarioCommand.Create(usuario));
                     
                     return CreatedAtAction(
                         nameof(GetUsuario),
@@ -61,11 +62,11 @@ namespace Utfpr.Troca.De.Talentos.Controllers
                         result);
                 }
                 
-                return UnprocessableEntity("Usuário nulo ou vazio.");
+                return UnprocessableEntity(MessageErrors.UsuarioInvalido);
             }
             catch (Exception)
             {
-                return UnprocessableEntity("Ocorreu um erro ao cadastrar o usuário.");
+                return UnprocessableEntity(MessageErrors.ErroAoCadastrarUsuario);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Utfpr.Troca.De.Talentos.CommandStack.Utils;
 using Utfpr.Troca.De.Talentos.Domain.Usuario;
 using Utfpr.Troca.De.Talentos.Domain.Usuario.Dtos;
 using Utfpr.Troca.De.Talentos.Domain.Usuario.Extensions;
@@ -10,7 +11,7 @@ using Utfpr.Troca.De.Talentos.Domain.Usuario.Interfaces;
 
 namespace Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands.Handlers
 {
-    public class UsuarioCommandHandler : IRequestHandler<UsuarioCriacaoAutenticacaoCommand, UsuarioDto>
+    public class UsuarioCommandHandler : IRequestHandler<CriarUsuarioCommand, UsuarioDto>
     {
         private readonly IMapper _mapper;
         private readonly IUsuarioRepository _usuarioRepository;
@@ -23,7 +24,7 @@ namespace Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands.Handlers
 
        #region Criar usuário
 
-        public async Task<UsuarioDto> Handle(UsuarioCriacaoAutenticacaoCommand request, CancellationToken cancellationToken)
+        public async Task<UsuarioDto> Handle(CriarUsuarioCommand request, CancellationToken cancellationToken)
         {
             var usuario = _mapper.Map<UsuarioDto, Usuario>(request.Usuario);
             var usuariojaCadastrado = await _usuarioRepository.VerificaSeUsuarioEstaCadastradoAsync(usuario?.Ra);
@@ -37,31 +38,13 @@ namespace Utfpr.Troca.De.Talentos.CommandStack.Usuarios.Commands.Handlers
                     var result = await _usuarioRepository.SaveUsuarioAsync(usuario);
                     return _mapper.Map<Usuario, UsuarioDto>(result);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Console.WriteLine(e);
-                    throw;
+                    throw new Exception(MessageErrors.UsuarioJaCadastro);
                 }
             }
 
-            throw new Exception("Usuário já cadastrado.");
-        }
-
-        private static void AutenticacaoUsuarioServerUtfAsync(UsuarioCriacaoAutenticacaoCommand request)
-        {
-            // Problemas de certificação SSL
-            
-            // var client = new RestClient("https://200.134.21.99/ldapauth/service/authenticate/");
-            // client.Authenticator = new HttpBasicAuthenticator(username, password);
-            // var request1 = new RestRequest("resource/{id}");
-            // request1.AddParameter("login", request.Email);
-            // request1.AddParameter("password", request.Senha);
-            // request1.AddHeader("Content-type", "application/json");
-            //request.AddFile("file", path);
-            // var response = client.Post(request1);
-            // var content = response.Content; // Raw content as string
-            // var response2 = client.Post<Person>(request);
-            // var name = response2.Data.Name;
+            throw new Exception(MessageErrors.UsuarioJaCadastro);
         }
 
         #endregion

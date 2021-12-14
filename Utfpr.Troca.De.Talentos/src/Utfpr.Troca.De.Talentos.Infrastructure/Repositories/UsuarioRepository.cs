@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Utfpr.Troca.De.Talentos.Domain.Pessoas;
 using Utfpr.Troca.De.Talentos.Domain.Usuario;
 using Utfpr.Troca.De.Talentos.Domain.Usuario.Interfaces;
 
@@ -36,7 +35,7 @@ namespace Utfpr.Troca.De.Talentos.Infrastructure.Repositories
             return usuario;
         }
 
-        public async Task<Usuario> ObterUsuarioPorIdAsync(long IdUsuario) => 
-            await _dbContext.Usuario.FirstOrDefaultAsync(x => x.Id.Equals(IdUsuario));
+        public async Task<Usuario> ObterUsuarioPorIdAsync(long idUsuario) => 
+            await _dbContext.Usuario.Include(x => x.Areas).FirstOrDefaultAsync(x => x.Id.Equals(idUsuario));
     }
 }

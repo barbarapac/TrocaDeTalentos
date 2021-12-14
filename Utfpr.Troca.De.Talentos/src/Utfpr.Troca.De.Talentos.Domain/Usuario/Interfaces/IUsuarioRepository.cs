@@ -6,6 +6,6 @@ namespace Utfpr.Troca.De.Talentos.Domain.Usuario.Interfaces
     {
         Task<bool> VerificaSeUsuarioEstaCadastradoAsync(string ra);
         Task<Usuario> SaveUsuarioAsync(Domain.Usuario.Usuario usuario);
-        Task<Usuario> ObterUsuarioPorIdAsync(long IdUsuario);
+        Task<Usuario> ObterUsuarioPorIdAsync(long idUsuario);
     }
 }

@@ -14,4 +14,19 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.17" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Repositories\MessageErrors.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MessageErrors.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Repositories\MessageErrors.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MessageErrors.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
