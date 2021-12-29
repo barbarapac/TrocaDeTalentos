@@ -15,5 +15,20 @@
         <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
         <PackageReference Include="RestSharp" Version="106.15.1-alpha.0.1" />
     </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Utils\MessageErrors.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MessageErrors.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Utils\MessageErrors.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Messagens.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
     
 </Project>
